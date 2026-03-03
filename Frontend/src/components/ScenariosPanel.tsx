@@ -35,7 +35,7 @@ export default function ScenariosPanel() {
   const [playlistId, setPlaylistId] = useState('')
   const [userId, setUserId] = useState('')
   const [songId, setSongId] = useState('')
-  const [chartName, setChartName] = useState('Top Songs')
+  const [chartName, setChartName] = useState('Billboard Hot 100')
 
   const handleFetch = async () => {
     setLoading(true)
@@ -154,7 +154,7 @@ export default function ScenariosPanel() {
             onChange={(e) => setPlaylistId(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleFetch()}
           />
-          <p className="hint">Examples: My Chill Vibes, K-Pop Bangers, Late Night Drive, Summer Latin</p>
+          <p className="hint">Example Playlist IDs: 1, 2, 3, 4</p>
         </>
         )}
 
@@ -245,7 +245,7 @@ export default function ScenariosPanel() {
                     <strong>{item.Title}</strong>
                     <br />
                     {item.Artists && <span>Artists: {item.Artists}</span>}
-                    {item.RankNumber && <span>Rank: {item.RankNumber}</span>}
+                    {item.RankNumber && <span> Rank: {item.RankNumber}</span>}
                   </>
                 )}
                 {selectedScenario === 'user-history' && (

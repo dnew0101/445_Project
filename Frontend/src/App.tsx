@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
+import ViewListeningHistory from './scenarioComponents/ViewListeningHistory';
+import ChartsTab from './tabs/ChartsTab';
+import Login from './Login';
+import PlaylistTab from './tabs/PlaylistTab';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState('searchGenre')
+  const [user, setUser] = useState<any>(null)
 
-  return (
+return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {!user ? <Login onLogin={setUser} /> :
+        <div>
+          <div className="navbar">
+            <button
+              className={activeTab === 'songs' ? 'active' : ''}
+              onClick={() => setActiveTab('songs')}
+            >
+              Songs
+            </button>
+            <button
+              className={activeTab === 'playlists' ? 'active' : ''}
+              onClick={() => setActiveTab('playlists')}
+            >
+              Playlists
+            </button>
+            <button
+              className={activeTab === 'history' ? 'active' : ''}
+              onClick={() => setActiveTab('history')}
+            >
+              History
+            </button>
+            <button
+              className={activeTab === 'charts' ? 'active' : ''}
+              onClick={() => setActiveTab('charts')}
+            >
+              Charts
+            </button>
+          </div>
+          <div className="content">
+           
+            {activeTab === 'playlists' && <PlaylistTab userID={user.UserID} />}
+            {activeTab === 'history' && <ViewListeningHistory userID={user.UserID} />}
+            {activeTab === 'charts' && <ChartsTab />}
+          </div>
+        </div>
+      }
     </>
   )
 }
 
 export default App
+
+// {activeTab === 'songs' && <SongsTab userID={user.UserID} />}

@@ -17,7 +17,7 @@ app.use(express.json());
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
+  password: process.env.DB_PASSWORD || '123abcjosh',
   database: process.env.DB_NAME || 'newman_david_kalcha_joshua_db',
   waitForConnections: true,
   connectionLimit: 10,
@@ -285,6 +285,67 @@ app.get('/api/analytics/listening-by-hour', async (req: Request, res: Response) 
     res.status(500).json({ error: 'Database error' });
   }
 });
+
+// Additional routes for login, playlist management, etc.
+
+// user login
+app.post('/api/login', async (req: Request, res: Response) => {
+  const { username, email } = req.body;
+
+  try {
+    const [rows] = await pool.query(
+      `SELECT UserID, Username 
+       FROM USER 
+       WHERE Username = ? 
+       AND Email = ?`,
+      [username, email]
+    );
+
+    const users = rows as any[];
+    if (users.length === 0) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+    res.json(users[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// create playlist
+app.post('/api/playlist/create', async (req: Request, res: Response) => {
+  const { userID, playlistName } = req.body;
+
+  try {
+    await pool.query(
+      `INSERT INTO PLAYLIST (UserID, PlaylistName, DateCreated) VALUES (?, ?, CURDATE())`,
+      [userID, playlistName]
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// get all playlists for a user 
+app.get('/api/playlists', async (req: Request, res: Response) => {
+  const userID = req.query.userID as string;
+  try {
+    const [rows] = await pool.query(
+      `SELECT PlaylistID, PlaylistName 
+       FROM PLAYLIST 
+       WHERE UserID = ?`,
+      [userID]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {

@@ -1,42 +1,225 @@
 #root {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.app-container {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid #29b2ca;
+  padding-bottom: 1rem;
+}
+
+.app-header h1 {
+  color: #fafafa;
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+/* Tabs */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #000000;
+  background-color: #f5f5f5;
+}
+
+.tab-button.active {
+  color: #29b2ca;
+  border-bottom-color: #29b2ca;
+  background:#1a1a1a;
+}
+
+.tab-content {
+  min-height: 400px;
+}
+
+/* Panel */
+.panel {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.panel h2 {
+  color: #000000;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+/* Scenario & Analytics Selectors */
+.scenario-selector,
+.analytics-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.scenario-selector label,
+.analytics-selector label {
+  font-weight: 600;
+  color: #000000;
+}
+
+.scenario-selector select,
+.analytics-selector select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #4d4d4d;
+  border-radius: 4px;
+  background-color: white;
+  color: #000;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.scenario-selector select:focus,
+.analytics-selector select:focus {
+  outline: none;
+  border-color: #29b2ca;
+}
+
+/* Input Section */
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.artists,
+.genre,
+.timestamp {
+  color: black;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.input-section, input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #4d4d4d;
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.2s;
+  color:#000;
+}
+
+.input-section input:focus {
+  outline: none;
+  border-color: #29b2ca;
+}
+
+.input-section button,
+.panel > button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #29b2ca;
+  color: rgb(238, 238, 238);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-start;
+}
+
+.input-section button:hover:not(:disabled),
+.panel > button:hover:not(:disabled) {
+  background-color: #29b2ca;
+}
+
+.input-section button:disabled,
+.panel > button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.hint {
+  color: #616161;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.error {
+  color: #d32f2f;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 4px;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.results {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.results h2 {
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.card {
-  padding: 2em;
+.results li {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border-left: 4px solid #2dc4df;
+  z-index: 1;
 }
 
-.read-the-docs {
-  color: #888;
+.results li strong {
+  color: #eeeeee;
+  font-size: 1.1rem;
+}
+
+.artists {
+  color: #eeeeee;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.genre,
+.timestamp {
+  color: #eeeeee;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  display: block;
 }

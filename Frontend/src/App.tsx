@@ -1,34 +1,37 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ScenariosPanel from './components/ScenariosPanel'
+import AnalyticsPanel from './components/AnalyticsPanel'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState<'scenarios' | 'analytics'>('scenarios')
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="app-container">
+      <header className="app-header">
+        <h1>Music Database Explorer</h1>
+      </header>
+
+      <div className="tabs-container">
+        <button 
+          className={`tab-button ${activeTab === 'scenarios' ? 'active' : ''}`}
+          onClick={() => setActiveTab('scenarios')}
+        >
+          Scenarios
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button 
+          className={`tab-button ${activeTab === 'analytics' ? 'active' : ''}`}
+          onClick={() => setActiveTab('analytics')}
+        >
+          Analytics
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <div className="tab-content">
+        {activeTab === 'scenarios' && <ScenariosPanel />}
+        {activeTab === 'analytics' && <AnalyticsPanel />}
+      </div>
+    </div>
   )
 }
 

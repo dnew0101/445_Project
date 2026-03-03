@@ -33,7 +33,7 @@ app.get('/health', (req: Request, res: Response) => {
 
 // 1. Browse Music by Genre
 app.get('/api/scenarios/browse-genre', async (req: Request, res: Response) => {
-  const genre = req.query.genre as string || 'Pop';
+  const genre = req.query.genre as string || '';
   try {
     const [rows] = await pool.query(
       `SELECT s.Title, GROUP_CONCAT(DISTINCT a.ArtistName SEPARATOR ', ') AS Artists, g.GenreName
@@ -42,11 +42,11 @@ app.get('/api/scenarios/browse-genre', async (req: Request, res: Response) => {
        JOIN GENRE g ON sg.GenreID = g.GenreID
        JOIN SONGARTIST sa ON s.SongID = sa.SongID
        JOIN ARTIST a ON sa.ArtistID = a.ArtistID
-       WHERE g.GenreName = ?
+       WHERE g.GenreName LIKE ?
        GROUP BY s.SongID, s.Title, g.GenreName
        ORDER BY s.Title
        LIMIT 20`,
-      [genre]
+      [`%${genre}%`]
     );
     res.json(rows);
   } catch (err) {

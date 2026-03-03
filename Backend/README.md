@@ -1,0 +1,1 @@
+This is the backend of this web application. It makes use of ExpressJS and MySQL to query the data from the MySQL db active on the local machine.

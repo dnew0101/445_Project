@@ -2,4 +2,14 @@ Final project for TCSS 445 - Database Design
 
 This project assumes you have MySQL installed on your local machine and that the MySQL database is running prior to spinning up this application. 
 
-schema.sql file will be added for portability.
+
+If you currently have the database on your local device then:
+
+cd Backend -> change directory
+npm run dev -> this starts the developer backend server on port 3000
+
+cd ../
+cd Frontend -> change directory again
+npm run dev -> this starts the Vite frontend server on port 5173
+
+With both servers running, you should then be able to go into your browser, and search localhost:5173, where you will be able to interface with the application and run queries through the GUI!

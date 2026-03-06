@@ -8,7 +8,7 @@ If you currently have the database on your local device then:
 1. cd Backend -> change directory
 2. npm run dev -> this starts the developer backend server on port 3000
 
-3. cd ../
+3. Open a new terminal instance.
 4. cd Frontend -> change directory again
 5. npm run dev -> this starts the Vite frontend server on port 5173
 
